@@ -20,7 +20,7 @@ def cli(inpath: Path, outpath: Path|None, frmt: str, chunk_size: int, overwrite:
   
   INPATH: path to the plain text file containing the to-be-spoken text.
   """
-  outpath = prepare(inpath, frmt, overwrite)
+  outpath = prepare(inpath, outpath, frmt, overwrite)
   content = get_content(inpath, chunk_size)
   f5tts = get_f5tts()
 
@@ -49,8 +49,8 @@ def prepare(in_path: Path, out_path: Path, frmt: str, overwrite: bool) -> Path:
     out_path = Path.joinpath(out_path, outname.name)
   else:
     out_path = outname
-  if out_path.exists() and (
-    not overwrite or (overwrite is None and not click.confirm(
+  if out_path.exists() and out_path.stat().st_size > 0 and (
+    overwrite == False or (overwrite is None and not click.confirm(
       f"Output ({out_path.absolute()}) exists. Do you want to continue?")
     )): exit(0)
   return out_path
