@@ -53,7 +53,7 @@ _re_space_stop = re.compile(r"\s?\.", re.MULTILINE)
 _re_multi_space = re.compile(r"\s{2,}", re.MULTILINE)
 _re_maxi_pause = re.compile(r"(\,\s){4,}$", re.MULTILINE)
 _re_ending = re.compile(r"\s+$")
-_re_heading_pause = re.compile(r"\n(?:(\w+ ?))+(?=\n)")
+_re_heading_pause = re.compile(r"(?P<heading>(?<!\.)(?<=\n)(?:\d+[\.\,\:\)])? ?[\w\-\:\; ]+(?!\.)(?=\n))")
 
 def pre_chunk_clean(content: str) -> str:
   """
@@ -74,8 +74,10 @@ def pre_chunk_clean(content: str) -> str:
   content = content.replace("&", " and ")
   content = _re_multi_space.sub(" ", content)
   content = _re_ending.sub("", content)
-  content = _re_heading_pause.
+  content = _re_heading_pause.sub(".\n\\g<heading>.", content)
   return content
+
+
 
 def _re_group_mod(match: re.Match, sep: str = " ", lowercase=False) -> str:
   return sep.join([group.lower() if lowercase else group for group in match.groups()])
