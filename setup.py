@@ -6,6 +6,7 @@ setup(
     py_modules=['main', 'content', 'tts'],
     install_requires=[
         'Click',
+        'click-default-group',
         'f5-tts-mlx',
         'soundfile',
         'tqdm',
