@@ -47,7 +47,27 @@ uv pip install --editable .
 ```bash
 uv run f5tts --help
 
-Usage: f5tts [OPTIONS] INPATH
+Usage: f5tts [OPTIONS] COMMAND [ARGS]...
+
+  Generates spoken audio for a given text file using F5-TTS and MLX.
+
+  COMMAND: Optional. Can be used to only call a sub-command. By default, runs
+  the default chain of commands, i.e., "tts".
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  tts*     Generates spoken audio for a given text file using F5-TTS and...
+  clean    Cleans the content from the given file to improve TTS quality.
+  prepare  Prepare parameters.
+  process  Process the content iteratively.
+```
+
+```bash
+uv run f5tts tts --help
+
+Usage: f5tts tts [OPTIONS] INPATH
 
   Generates spoken audio for a given text file using F5-TTS and MLX.
 

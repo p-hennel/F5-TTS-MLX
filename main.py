@@ -14,7 +14,7 @@ def cli():
   """
   Generates spoken audio for a given text file using F5-TTS and MLX.
   
-  COMMAND: Optional. Can be used to only call a sub-command. By default, runs the default chain of commands.
+  COMMAND: Optional. Can be used to only call a sub-command. By default, runs the default chain of commands, i.e., "tts".
   """
   pass
 
